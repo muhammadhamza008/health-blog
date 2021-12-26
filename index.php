@@ -1,37 +1,17 @@
 <?php
 /**
- * The site's entry point.
+ * Front to the WordPress application. This file doesn't do anything, but loads
+ * wp-blog-header.php which does and tells WordPress to load the theme.
  *
- * Loads the relevant template part,
- * the loop is executed (when needed) by the relevant template part.
- *
- * @package HelloElementor
+ * @package WordPress
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+/**
+ * Tells WordPress to load the WordPress theme and output it.
+ *
+ * @var bool
+ */
+define( 'WP_USE_THEMES', true );
 
-get_header();
-
-$is_elementor_theme_exist = function_exists( 'elementor_theme_do_location' );
-
-if ( is_singular() ) {
-	if ( ! $is_elementor_theme_exist || ! elementor_theme_do_location( 'single' ) ) {
-		get_template_part( 'template-parts/single' );
-	}
-} elseif ( is_archive() || is_home() ) {
-	if ( ! $is_elementor_theme_exist || ! elementor_theme_do_location( 'archive' ) ) {
-		get_template_part( 'template-parts/archive' );
-	}
-} elseif ( is_search() ) {
-	if ( ! $is_elementor_theme_exist || ! elementor_theme_do_location( 'archive' ) ) {
-		get_template_part( 'template-parts/search' );
-	}
-} else {
-	if ( ! $is_elementor_theme_exist || ! elementor_theme_do_location( 'single' ) ) {
-		get_template_part( 'template-parts/404' );
-	}
-}
-
-get_footer();
+/** Loads the WordPress Environment and Template */
+require __DIR__ . '/wp-blog-header.php';
